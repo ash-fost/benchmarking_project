@@ -6,12 +6,12 @@ This project aims to benchmark four orthology prediction tools to investigate th
 
 The four tools benchmarked are:
 
-|     Tool       |    Source        |
-| -------------- | -----------------|
-| SonicParanoid2 | https://gitlab.com/salvo981/sonicparanoid2 |
-| Proteinortho   | https://gitlab.com/paulklemm_PHD/proteinortho/-/tree/master?ref_type=heads |
-| OrthoFinder    | https://orthofinder.github.io/OrthoFinder/ |
-| OrthoLoger     | https://orthologer.ezlab.org/ |
+| Tool | Version | Execution Method | Source |
+|------|---------|------------------|--------|
+| SonicParanoid2 | 2.0.9 | Pixi environment (pixi) | https://gitlab.com/salvo981/sonicparanoid2 |
+| Proteinortho   | 6.3.6  | Conda environment (proteinortho_env) | https://gitlab.com/paulklemm_PHD/proteinortho/-/tree/master?ref_type=heads   |
+| OrthoFinder    | 2.5.5 | Conda environment (of3_env) | https://orthofinder.github.io/OrthoFinder/ |
+| OrthoLoger     | 3.9.1 | Pixi environment (pixi) | https://orthologer.ezlab.org/ |
 
 
 The tools will be evaluated using protein reference datasets from closely related and distantly related species. We will also investigate whether dataset size affects tool performance.

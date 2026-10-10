@@ -1,4 +1,6 @@
 # Sonicparanoid2
+https://gitlab.com/salvo981/sonicparanoid2
+https://bioconda.github.io/recipes/sonicparanoid/README.html
 
 Sonicparanoid2 was installed using pixi
 

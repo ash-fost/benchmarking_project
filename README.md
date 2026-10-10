@@ -50,12 +50,11 @@ Reference proteomes provide protein sequences for different species and can be u
 
 The types of datasets used in this project:
 
-| Evolutionary distance | Dataset size | Purpose |
-|-----------------------|--------------|---------|
-| Closely related species | Small | Evaluate performance on a smaller, less computationally demanding dataset |
-| Closely related species | Large | Evaluate performance on a larger dataset of closely related species |
-| Distantly related species | Small | Evaluate performance on a smaller dataset with greater evolutionary divergence |
-| Distantly related species | Large | Evaluate performance on a larger dataset with greater evolutionary divergence |
+| Dataset | Species | Purpose |
+|---------|---------|---------|
+| Full | All 78 QfO species | Main benchmark |
+| Close | list species used | Closely related species |
+| Distant | list species used | More distantly related species |
 
 Species were selected based on their evolutionary relationships and the availability of suitable proteomes and reference orthology data.
 

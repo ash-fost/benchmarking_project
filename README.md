@@ -40,9 +40,9 @@ The data for this project is selected from the European Bioinformatics Institute
 
 **QfO reference proteome releases:** `https://ftp.ebi.ac.uk/pub/databases/reference_proteomes/previous_releases/`
 
-The dataset(s) we are using (add more links as we choose more datasets): 
+The dataset we are using: 
 
-**QfO release 2026_02:** `https://ftp.ebi.ac.uk/pub/databases/reference_proteomes/previous_releases/qfo_release-2026_02/`
+**QfO release 2020_04:** `https://ftp.ebi.ac.uk/pub/databases/reference_proteomes/previous_releases/qfo_release-2020_04/`
 
 Reference proteomes provide protein sequences for different species and can be used as input for orthology inference tools.
 

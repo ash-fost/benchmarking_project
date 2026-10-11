@@ -64,15 +64,15 @@ Species were selected based on their evolutionary relationships and the availabi
 |-------------|---------|-------------|---|---|
 | `UP000005640` | *Homo sapiens* | Human | 9606 | Close and distant |
 | `UP000002277` | *Pan troglodytes* | Chimpanzee | 9598 | Close |
-| `UP000000589` | *Mus musculus* | House mouse | 10090 | Close |
-| `UP000002494` | *Rattus norvegicus* | Brown rat | 10116 | Close |
-| `UP000002254` | *Canis lupus familiaris* | Domestic dog | 9615 | Close |
-| `UP000009136` | *Bos taurus* | Cattle | 9913 | Close |
+| `UP000000589` | *Mus musculus* | Mouse | 10090 | Close |
+| `UP000002494` | *Rattus norvegicus* | Rat | 10116 | Close |
+| `UP000002254` | *Canis lupus familiaris* | Dog | 9615 | Close |
+| `UP000009136` | *Bos taurus* | Bovine | 9913 | Close |
 | `UP000000437` | *Danio rerio* | Zebrafish | 7955 | Distant |
 | `UP000000803` | *Drosophila melanogaster* | Fruit fly | 7227 | Distant |
 | `UP000001940` | *Caenorhabditis elegans* | Roundworm | 6239 | Distant |
-| `UP000002311` | *Saccharomyces cerevisiae* | Budding yeast | 559292 | Distant |
-| `UP000006548` | *Arabidopsis thaliana* | Thale cress | 3702 | Distant |
+| `UP000002311` | *Saccharomyces cerevisiae* | Baker's yeast | 559292 | Distant |
+| `UP000006548` | *Arabidopsis thaliana* | Mouse-ear cress | 3702 | Distant |
 
 **Dataset summary:** The dataset contains 11 eukaryotic species. The close subset includes six mammalian species, and the distant subset includes six species representing diverse eukaryotic lineages. Human is shared between both subsets.
 

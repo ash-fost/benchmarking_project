@@ -27,7 +27,7 @@ tar -xzf ~/benchmarking_project/datasets/QfO_release_2020_04.tar.gz -C .
 combine all the files for the main benchmarking input
 
 ```bash
-benchmarking_project/datasets
+cd benchmarking_project/datasets
 mkdir QfO_release_2020_04_combined_all
 cp QfO_release_2020_04/*/*.fasta QfO_release_2020_04_combined_all
 rm QfO_release_2020_04_combined_all/*_DNA.fasta # remove DNA fasta files to keep just the protein fasta files
@@ -53,7 +53,8 @@ cp QfO_release_2020_04/Eukaryota/UP000005640_9606.fasta QfO_release_2020_04/Euka
 
 ```bash
 # do not run this it is unfinished I am working on it
-perl proteinortho6.pl -project=main_benchmark_results datasets/QfO_release_2020_04.tar.gz
+cd benchmarking_project
+perl proteinortho6.pl -project=main_benchmark_results datasets/QfO_release_2020_04_combined_all
 ```
 
 ## Orthofinder

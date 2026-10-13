@@ -24,6 +24,15 @@ cd QfO_release_2020_04
 tar -xzf ~/benchmarking_project/datasets/QfO_release_2020_04.tar.gz -C .
 ```
 
+combine all the files for the main benchmarking input
+
+```bash
+benchmarking_project/datasets
+mkdir QfO_release_2020_04_combined_all
+cp QfO_release_2020_04/*/*.fasta QfO_release_2020_04_combined_all
+rm QfO_release_2020_04_combined_all/*_DNA.fasta # remove DNA fasta files to keep just the protein fasta files
+```
+
 extract species for the subdatasets
 
 ```bash

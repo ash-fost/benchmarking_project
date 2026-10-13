@@ -52,9 +52,9 @@ cp QfO_release_2020_04/Eukaryota/UP000005640_9606.fasta QfO_release_2020_04/Euka
 ## Proteinortho
 
 ```bash
-# do not run this it is unfinished I am working on it
 cd benchmarking_project
-perl proteinortho6.pl -project=main_benchmark_results datasets/QfO_release_2020_04_combined_all
+conda activate proteinortho_env
+perl proteinortho6.pl -project=main_benchmark_results datasets/QfO_release_2020_04_combined_all/*.fasta
 ```
 
 ## Orthofinder

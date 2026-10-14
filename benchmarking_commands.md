@@ -31,6 +31,7 @@ cd benchmarking_project/datasets
 mkdir QfO_release_2020_04_combined_all
 cp QfO_release_2020_04/*/*.fasta QfO_release_2020_04_combined_all
 rm QfO_release_2020_04_combined_all/*_DNA.fasta # remove DNA fasta files to keep just the protein fasta files
+rm QfO_release_2020_04_combined_all/*_additional.fasta # remove protein isoform fasta files to keep just the protein fasta files
 ```
 
 extract species for the subdatasets
@@ -53,10 +54,30 @@ cp QfO_release_2020_04/Eukaryota/UP000005640_9606.fasta QfO_release_2020_04/Euka
 
 ```bash
 cd benchmarking_project
+mkdir proteinortho_results
 conda activate proteinortho_env
-perl proteinortho6.pl -project=main_benchmark_results datasets/QfO_release_2020_04_combined_all/*.fasta
+perl proteinortho6.pl -project=proteinortho_results/proteinortho_main_benchmark datasets/QfO_release_2020_04_combined_all/*.fasta
 ```
 
 ## Orthofinder
 
 ## OrthoLoger
+
+```bash
+cd benchmarking_project
+mkdir orthologer_results
+
+# DO NOT RUN
+# working on this now its not working currently
+pixi run bash -c '
+export PATH="$CONDA_PREFIX/bin:$PATH"
+cd /home/epolonsky/benchmarking_project/orthologer_results
+orthologer -c create
+'
+pixi run bash -c '
+export PATH="$CONDA_PREFIX/bin:$PATH"
+cd /home/epolonsky/benchmarking_project/orthologer_results
+orthologer -c import -d ../datasets/QfO_release_2020_04_combined_all
+'
+```
+

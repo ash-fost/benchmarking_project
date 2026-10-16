@@ -70,29 +70,30 @@ mv proteinortho_main_benchmark.proteinortho.tsv proteinortho_results
 
 ## OrthoLoger
 
-DID NOT RUN CORRECTLY YET - trying to fix this
 ```bash
 cd benchmarking_project
-cp orthologer_test_data/orthomapper_conf.sh orthologer_results/orthomapper_conf.sh
 mkdir orthologer_results
+cp orthologer_test_data/orthomapper_conf.sh orthologer_results/orthomapper_conf.sh
 
 pixi run bash -c '
 export PATH="$CONDA_PREFIX/bin:$PATH"
+export ODBAPI_URL_VERSION="v12-2"
 cd /home/epolonsky/benchmarking_project/orthologer_results
 orthologer -c create
 '
+
 cd orthologer_results
 
 pixi run bash -c '
 export PATH="$CONDA_PREFIX/bin:$PATH"
-orthologer -c import \
-    -d /home/epolonsky/benchmarking_project/datasets/QfO_release_2020_04_combined_all \
-    -p orthologer_main_benchmark
+export ODBAPI_URL_VERSION="v12-2"
+orthologer -c import -d /home/epolonsky/benchmarking_project/datasets/QfO_release_2020_04_combined_all -p orthologer_main_benchmark
 '
 
 nohup pixi run bash -c '
 export PATH="$CONDA_PREFIX/bin:$PATH"
-orthologer -c run -n orthologer_main_benchmark
+export ODBAPI_URL_VERSION="v12-2"
+orthologer -c run -p orthologer_main_benchmark
 ' &
 ```
 

@@ -56,28 +56,43 @@ cp QfO_release_2020_04/Eukaryota/UP000005640_9606.fasta QfO_release_2020_04/Euka
 cd benchmarking_project
 mkdir proteinortho_results
 conda activate proteinortho_env
-perl proteinortho6.pl -project=proteinortho_results/proteinortho_main_benchmark datasets/QfO_release_2020_04_combined_all/*.fasta
+
+perl proteinortho6.pl -project=proteinortho_main_benchmark datasets/QfO_release_2020_04_combined_all/*.fasta
+
+# move the files to the proteinortho results directory
+mv proteinortho_main_benchmark.blast-graph proteinortho_results
+mv proteinortho_main_benchmark.info proteinortho_results
+mv proteinortho_main_benchmark.proteinortho-graph proteinortho_results
+mv proteinortho_main_benchmark.proteinortho.tsv proteinortho_results
 ```
 
 ## Orthofinder
 
 ## OrthoLoger
 
+DID NOT RUN CORRECTLY YET - trying to fix this
 ```bash
 cd benchmarking_project
+cp orthologer_test_data/orthomapper_conf.sh orthologer_results/orthomapper_conf.sh
 mkdir orthologer_results
 
-# DO NOT RUN
-# working on this now its not working currently
 pixi run bash -c '
 export PATH="$CONDA_PREFIX/bin:$PATH"
 cd /home/epolonsky/benchmarking_project/orthologer_results
 orthologer -c create
 '
+cd orthologer_results
+
 pixi run bash -c '
 export PATH="$CONDA_PREFIX/bin:$PATH"
-cd /home/epolonsky/benchmarking_project/orthologer_results
-orthologer -c import -d ../datasets/QfO_release_2020_04_combined_all
+orthologer -c import \
+    -d /home/epolonsky/benchmarking_project/datasets/QfO_release_2020_04_combined_all \
+    -p orthologer_main_benchmark
 '
+
+nohup pixi run bash -c '
+export PATH="$CONDA_PREFIX/bin:$PATH"
+orthologer -c run -n orthologer_main_benchmark
+' &
 ```
 

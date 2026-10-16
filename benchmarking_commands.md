@@ -57,7 +57,7 @@ cd benchmarking_project
 mkdir proteinortho_results
 conda activate proteinortho_env
 
-perl proteinortho6.pl -project=proteinortho_main_benchmark datasets/QfO_release_2020_04_combined_all/*.fasta
+nohup perl proteinortho6.pl -project=proteinortho_main_benchmark datasets/QfO_release_2020_04_combined_all/*.fasta &
 
 # move the files to the proteinortho results directory
 mv proteinortho_main_benchmark.blast-graph proteinortho_results

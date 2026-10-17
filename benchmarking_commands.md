@@ -50,6 +50,12 @@ cp QfO_release_2020_04/Eukaryota/UP000005640_9606.fasta QfO_release_2020_04/Euka
 
 ## SonicParanoid2
 
+```bash
+cd benchmarking_project
+cp datasets/QfO_release_2020_04_combined_all/*.fasta datasets/sonicparanoid_fasta_only/
+nohup /usr/bin/time --verbose -o sonicparanoid_resource_usage.txt pixi run sonicparanoid -i datasets/sonicparanoid_fasta_only -o sonicparanoid_results --project-id sonicparanoid_main_benchmark --graph-only &
+```
+
 ## Proteinortho
 
 ```bash
@@ -57,9 +63,9 @@ cd benchmarking_project
 mkdir proteinortho_results
 conda activate proteinortho_env
 
-nohup perl proteinortho6.pl -project=proteinortho_main_benchmark datasets/QfO_release_2020_04_combined_all/*.fasta &
+nohup /usr/bin/time --verbose -o proteinortho_resource_usage.txt perl proteinortho6.pl -project=proteinortho_main_benchmark datasets/QfO_release_2020_04_combined_all/*.fasta &
 
-# move the files to the proteinortho results directory
+# move the files to the proteinortho results directory after run finished
 mv proteinortho_main_benchmark.blast-graph proteinortho_results
 mv proteinortho_main_benchmark.info proteinortho_results
 mv proteinortho_main_benchmark.proteinortho-graph proteinortho_results
@@ -71,7 +77,7 @@ mv proteinortho_main_benchmark.proteinortho.tsv proteinortho_results
 ```bash
 conda activate of3_env
 cd benchmarking_project
-nohup orthofinder -f datasets/QfO_release_2020_04_combined_all -o orthofinder_results &
+nohup /usr/bin/time --verbose -o orthofinder_resource_usage.txt orthofinder -f datasets/QfO_release_2020_04_combined_all -o orthofinder_results &
 ```
 
 ## OrthoLoger
@@ -96,7 +102,7 @@ export ODBAPI_URL_VERSION="v12-2"
 orthologer -c import -d /home/epolonsky/benchmarking_project/datasets/QfO_release_2020_04_combined_all -p orthologer_main_benchmark
 '
 
-nohup pixi run bash -c '
+nohup /usr/bin/time --verbose -o orthologer_resource_usage.txt pixi run bash -c '
 export PATH="$CONDA_PREFIX/bin:$PATH"
 export ODBAPI_URL_VERSION="v12-2"
 orthologer -c run -p orthologer_main_benchmark

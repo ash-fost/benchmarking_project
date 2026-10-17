@@ -68,6 +68,12 @@ mv proteinortho_main_benchmark.proteinortho.tsv proteinortho_results
 
 ## Orthofinder
 
+```bash
+conda activate of3_env
+cd benchmarking_project
+nohup orthofinder -f datasets/QfO_release_2020_04_combined_all -o orthofinder_results &
+```
+
 ## OrthoLoger
 
 ```bash
@@ -96,4 +102,3 @@ export ODBAPI_URL_VERSION="v12-2"
 orthologer -c run -p orthologer_main_benchmark
 ' &
 ```
-

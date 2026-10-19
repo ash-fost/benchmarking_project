@@ -190,3 +190,7 @@ The tools are compare using the following measures:
 | Agreement | Overlap and differences between predicted ortholog relationships |
 | Evolutionary distance | Changes in accuracy between closely related and distantly related species |
 | Dataset size | Changes in runtime, memory, and accuracy across dataset sizes |
+
+# Code for project
+
+All the code used for this project is in the `benchmarking_commands.md` file.

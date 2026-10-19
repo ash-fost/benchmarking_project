@@ -85,7 +85,6 @@ nohup /usr/bin/time --verbose -o orthofinder_resource_usage.txt orthofinder -f d
 ```bash
 cd benchmarking_project
 mkdir orthologer_results
-cp orthologer_test_data/orthomapper_conf.sh orthologer_results/orthomapper_conf.sh
 
 pixi run bash -c '
 export PATH="$CONDA_PREFIX/bin:$PATH"
@@ -94,6 +93,7 @@ cd /home/epolonsky/benchmarking_project/orthologer_results
 orthologer -c create
 '
 
+cp orthologer_test_data/orthomapper_conf.sh orthologer_results/orthomapper_conf.sh
 cd orthologer_results
 
 pixi run bash -c '

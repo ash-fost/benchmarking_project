@@ -83,8 +83,7 @@ The tools are compare using the following measures:
 | Category | Measurement |
 |----------|-------------|
 | Accuracy | Precision, recall, and F1 score |
-| Runtime | *`time`* |
-| Memory | *`/usr/bin/time —verbose`* |
+| Runtime and Memory | *`/usr/bin/time —verbose`* |
 | Agreement | Overlap and differences between predicted ortholog relationships |
 | Evolutionary distance | Changes in accuracy between closely related and distantly related species |
 | Dataset size | Changes in runtime, memory, and accuracy across dataset sizes |

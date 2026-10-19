@@ -58,7 +58,7 @@ cd sonicparanoid_test_data/sonicparanoid_test/
 pixi run sonicparanoid -i ./test_input -o ./test_output --project-id my_first_run -t 4 --graph-only
 ```
 
-problem we were having before (in case we want to try to fit it again)
+problem we were having before (in case we want to try to fix it again)
 https://gitlab.com/salvo981/sonicparanoid2/-/work_items/54
 
 ## Orthofinder

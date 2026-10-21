@@ -149,7 +149,7 @@ In the command below, replace:
 
 ```bash
 # Run OrthoLoger with the test script
-pixi run bash -c 'export PATH="$CONDA_PREFIX/bin:$PATH" /home/epolonsky/benchmarking_project/.pixi/envs/default/ORTHOLOGER-3.9.1/test/run_test.sh prot/main'
+pixi run bash -c 'export PATH="$CONDA_PREFIX/bin:$PATH"; /home/epolonsky/benchmarking_project/.pixi/envs/default/ORTHOLOGER-3.9.1/test/run_test.sh prot/main'
 ```
 
 OrthoLoger writes the test output to the test installation directory:

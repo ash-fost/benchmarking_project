@@ -106,7 +106,7 @@ conda create -n of3_env python=3.12
 # Activate the conda environment
 conda activate of3_env
 
-# Install Orthofinder through conda
+# Install OrthoFinder through conda
 conda install -c conda-forge -c bioconda orthofinder
 
 # Install numpy through conda

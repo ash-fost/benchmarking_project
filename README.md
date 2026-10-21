@@ -186,6 +186,9 @@ conda create -n proteinortho_env -c conda-forge -c bioconda python=3.7 proteinor
 run on test data:
 
 ```bash
+# Go into the benchmarking project directory
+cd ~/benchmarking_project
+
 # activate the proteinortho conda environment
 conda activate proteinortho_env
 

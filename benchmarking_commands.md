@@ -12,8 +12,10 @@ The main benchmarking dataset was downloaded using `wget`
 ```bash
 cd benchmarking_project
 #change to the directory that contains the tools to be benchmarked
+
 mkdir datasets
 #make a new directory within the benchmarking_project directory for the datasets
+
 nohup wget -P datasets https://ftp.ebi.ac.uk/pub/databases/reference_proteomes/previous_releases/qfo_release-2020_04/QfO_release_2020_04.tar.gz &
 #retrieves the dataset using wget from the orthology benchmarking service webpage
 #the 2020_04 dataset was chosen because it allows comparisons with the most tools
@@ -23,29 +25,32 @@ Extract contents of QfO_release_2020_04.tar.gz
 
 ```bash
 cd benchmarking_project/datasets
+
 mkdir QfO_release_2020_04
+
 cd QfO_release_2020_04
+
 tar -xzf ~/benchmarking_project/datasets/QfO_release_2020_04.tar.gz -C .
 ```
 
-combine all the files for the main benchmarking input
+combine all the protein fasta files for the main benchmarking input
 
 ```bash
 cd benchmarking_project/datasets
+
 mkdir QfO_release_2020_04_combined_all
+
 cp QfO_release_2020_04/*/*.fasta QfO_release_2020_04_combined_all
+
 rm QfO_release_2020_04_combined_all/*_DNA.fasta # remove DNA fasta files to keep just the protein fasta files
 rm QfO_release_2020_04_combined_all/*_additional.fasta # remove protein isoform fasta files to keep just the protein fasta files
 ```
 
-```bash
-cd benchmarking_project/datasets
-#change directories to the newly created datasets directory
-tar -xzf QfO_release_2020_04.tar.gz -C . Eukaryota/UP000005640_9606.fasta Eukaryota/UP000002277_9598.fasta Eukaryota/UP000000589_10090.fasta Eukaryota/UP000002494_10116.fasta Eukaryota/UP000002254_9615.fasta Eukaryota/UP000009136_9913.fasta Eukaryota/UP000000437_7955.fasta Eukaryota/UP000000803_7227.fasta Eukaryota/UP000001940_6239.fasta Eukaryota/UP000002311_559292.fasta Eukaryota/UP000006548_3702.fasta
-#creates fasta files of species within the larger dataset for subdatasets
+extract species for the subdatasets
 
 ```bash
 cd benchmarking_project/datasets
+
 mkdir distant_species
 #makes a new directory within the datasets directory for distant species
 mkdir close_species
@@ -63,6 +68,7 @@ cp QfO_release_2020_04/Eukaryota/UP000005640_9606.fasta QfO_release_2020_04/Euka
 ```bash
 cd benchmarking_project
 cp datasets/QfO_release_2020_04_combined_all/*.fasta datasets/sonicparanoid_fasta_only/
+
 nohup /usr/bin/time --verbose -o sonicparanoid_resource_usage.txt pixi run sonicparanoid -i datasets/sonicparanoid_fasta_only -o sonicparanoid_results --project-id sonicparanoid_main_benchmark --graph-only &
 ```
 
@@ -87,6 +93,7 @@ mv proteinortho_main_benchmark.proteinortho.tsv proteinortho_results
 ```bash
 conda activate of3_env
 cd benchmarking_project
+
 nohup /usr/bin/time --verbose -o orthofinder_resource_usage.txt orthofinder -f datasets/QfO_release_2020_04_combined_all -o orthofinder_results &
 ```
 

@@ -39,6 +39,9 @@ Pixi was used to install Sonicparanoid2 and OrthoLoger
 The Pixi version used was 0.81.0
 
 ```bash
+# Go into the benchmarking project directory
+cd ~/benchmarking_project
+
 # Install Pixi
 wget -qO- https://pixi.sh/install.sh | sh
 
@@ -81,6 +84,9 @@ we did not use the mmsqs2 function of this tool as it was incompatible with the 
 run on test data:
 
 ```bash
+# Go into the benchmarking project directory
+cd ~/benchmarking_project
+
 # Retrieve the test data from SonicParanoid
 pixi run sonicparanoid-get-test-data -o sonicparanoid_test_data
 
@@ -100,6 +106,9 @@ https://orthofinder.github.io/OrthoFinder/
 OrthoFinder was installed through a conda environment
 
 ```bash
+# Go into the benchmarking project directory
+cd ~/benchmarking_project
+
 # Create conda environment 
 conda create -n of3_env python=3.12
 
@@ -116,6 +125,9 @@ conda install numpy=1.26.4
 run on test data:
 
 ```bash
+# Go into the benchmarking project directory
+cd ~/benchmarking_project
+
 # Activate the conda environment for OrthoFinder
 conda activate of3_env
 
@@ -131,6 +143,9 @@ https://bioconda.github.io/recipes/orthologer/README.html
 OrthoLoger was installed using pixi
  
 ```bash
+# Go into the benchmarking project directory
+cd ~/benchmarking_project
+
 # Add the right dependencies and install OrthoLoger
 pixi add python=3.12 "numpy<2" "scipy<1.13" "orthologer=3.9.1"
 
@@ -189,6 +204,9 @@ https://gitlab.com/paulklemm_PHD/proteinortho/-/tree/master?ref_type=heads
 proteinortho was installed through a conda environment
 
 ```bash
+# Go into the benchmarking project directory
+cd ~/benchmarking_project
+
 # Make environment and install proteinortho with conda
 conda create -n proteinortho_env -c conda-forge -c bioconda python=3.7 proteinortho
 ```
@@ -196,11 +214,25 @@ conda create -n proteinortho_env -c conda-forge -c bioconda python=3.7 proteinor
 run on test data:
 
 ```bash
+# Go into the benchmarking project directory
+cd ~/benchmarking_project
+
 # activate the proteinortho conda environment
 conda activate proteinortho_env
 
 # run the perl script on the test data
-perl proteinortho6.pl -project= proteinortho_test_data/ proteinortho_test_data/C.faa proteinortho_test_data/E.faa proteinortho_test_data/L.faa proteinortho_test_data/M.faa
+perl proteinortho6.pl -project=proteinortho_test_data proteinortho_test_data/C.faa proteinortho_test_data/E.faa proteinortho_test_data/L.faa proteinortho_test_data/M.faa
+
+# Make the proteinortho test data directory
+mkdir proteinortho_test_data
+
+# Move the output files into the proteinortho test data directory
+mv ~/benchmarking_project/proteinortho_test_data/proteinortho_test_data.blast-graph
+mv ~/benchmarking_project/proteinortho_test_data/proteinortho_test_data.info
+mv ~/benchmarking_project/proteinortho_test_data/proteinortho_test_data.proteinortho-graph
+mv ~/benchmarking_project/proteinortho_test_data/proteinortho_test_data.proteinortho-graph.summary
+mv ~/benchmarking_project/proteinortho_test_data/proteinortho_test_data.proteinortho.html
+mv ~/benchmarking_project/proteinortho_test_data/proteinortho_test_data.proteinortho.tsv
 ```
 
 # Data Selection

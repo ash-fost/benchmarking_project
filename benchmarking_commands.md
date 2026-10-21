@@ -31,7 +31,15 @@ tar -xzf ~/benchmarking_project/datasets/QfO_release_2020_04.tar.gz -C .
 combine all the files for the main benchmarking input
 
 ```bash
-cd datasets
+cd benchmarking_project/datasets
+mkdir QfO_release_2020_04_combined_all
+cp QfO_release_2020_04/*/*.fasta QfO_release_2020_04_combined_all
+rm QfO_release_2020_04_combined_all/*_DNA.fasta # remove DNA fasta files to keep just the protein fasta files
+rm QfO_release_2020_04_combined_all/*_additional.fasta # remove protein isoform fasta files to keep just the protein fasta files
+```
+
+```bash
+cd benchmarking_project/datasets
 #change directories to the newly created datasets directory
 tar -xzf QfO_release_2020_04.tar.gz -C . Eukaryota/UP000005640_9606.fasta Eukaryota/UP000002277_9598.fasta Eukaryota/UP000000589_10090.fasta Eukaryota/UP000002494_10116.fasta Eukaryota/UP000002254_9615.fasta Eukaryota/UP000009136_9913.fasta Eukaryota/UP000000437_7955.fasta Eukaryota/UP000000803_7227.fasta Eukaryota/UP000001940_6239.fasta Eukaryota/UP000002311_559292.fasta Eukaryota/UP000006548_3702.fasta
 #creates fasta files of species within the larger dataset for subdatasets

@@ -193,7 +193,18 @@ cd ~/benchmarking_project
 conda activate proteinortho_env
 
 # run the perl script on the test data
-perl proteinortho6.pl -project=proteinortho_test_data/ proteinortho_test_data/C.faa proteinortho_test_data/E.faa proteinortho_test_data/L.faa proteinortho_test_data/M.faa
+perl proteinortho6.pl -project=proteinortho_test_data proteinortho_test_data/C.faa proteinortho_test_data/E.faa proteinortho_test_data/L.faa proteinortho_test_data/M.faa
+
+# Make the proteinortho test data directory
+mkdir proteinortho_test_data
+
+# Move the output files into the proteinortho test data directory
+mv ~/benchmarking_project/proteinortho_test_data/proteinortho_test_data.blast-graph
+mv ~/benchmarking_project/proteinortho_test_data/proteinortho_test_data.info
+mv ~/benchmarking_project/proteinortho_test_data/proteinortho_test_data.proteinortho-graph
+mv ~/benchmarking_project/proteinortho_test_data/proteinortho_test_data.proteinortho-graph.summary
+mv ~/benchmarking_project/proteinortho_test_data/proteinortho_test_data.proteinortho.html
+mv ~/benchmarking_project/proteinortho_test_data/proteinortho_test_data.proteinortho.tsv
 ```
 
 # Data Selection

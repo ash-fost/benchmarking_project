@@ -32,51 +32,94 @@ Computational tools identify orthologs using different combinations of sequence 
 
 # Tool Installation
 
+## Pixi
+
+Pixi was used to install Sonicparanoid2 and OrthoLoger
+
+The Pixi version used was 0.81.0
+
+```bash
+# Install Pixi
+wget -qO- https://pixi.sh/install.sh | sh
+
+# Reload Bash configuration
+source ~/.bashrc
+
+# Verify Pixi installation
+pixi --version
+
+# Go into the benchmarking project directory
+cd ~/benchmarking_project
+
+# Initialize Pixi project
+pixi init
+
+# Add package channels to the Pixi project
+pixi workspace channel add conda-forge
+pixi workspace channel add bioconda
+```
+
+
 ## Sonicparanoid2
 https://gitlab.com/salvo981/sonicparanoid2
 https://bioconda.github.io/recipes/sonicparanoid/README.html
 
 Sonicparanoid2 was installed using pixi
 
-we did not use the mmsqs2 function of this tool as it was incompatible with the CPU on the server it required AVX2 and we only had AVX1. This was done using the --graph-only flag.
-
 ```bash
-wget -qO- https://pixi.sh/install.sh | sh
-source ~/.bashrc
+# Go into the benchmarking project directory
 cd ~/benchmarking_project
-pixi init
-pixi workspace channel add conda-forge
-pixi workspace channel add bioconda
+
+# Add Python 3.10 to the Pixi project
 pixi add python=3.10
+
+# Install SonicParanoid
 pixi add --pypi sonicparanoid
 ```
-run test data
+
+we did not use the mmsqs2 function of this tool as it was incompatible with the CPU on the server it required AVX2 and we only had AVX1. This was done using the --graph-only flag.
+run on test data:
 
 ```bash
+# Retrieve the test data from SonicParanoid
 pixi run sonicparanoid-get-test-data -o sonicparanoid_test_data
+
+# Go into the SonicParanoid test data directory
 cd sonicparanoid_test_data/sonicparanoid_test/
+
+# Run SonicParanoid on the test data
 pixi run sonicparanoid -i ./test_input -o ./test_output --project-id my_first_run -t 4 --graph-only
 ```
 
 problem we were having before (in case we want to try to fix it again)
 https://gitlab.com/salvo981/sonicparanoid2/-/work_items/54
 
-## Orthofinder
+## OrthoFinder
 https://orthofinder.github.io/OrthoFinder/
 
-Orthofinder was installed through a conda environment
+OrthoFinder was installed through a conda environment
 
 ```bash
+# Create conda environment 
 conda create -n of3_env python=3.12
+
+# Activate the conda environment
 conda activate of3_env
+
+# Install Orthofinder through conda
 conda install -c conda-forge -c bioconda orthofinder
+
+# Install numpy through conda
 conda install numpy=1.26.4
 ```
 
-run test data
+run on test data:
 
 ```bash
+# Activate the conda environment for OrthoFinder
 conda activate of3_env
+
+# Run OrthoFinder on the test data
 orthofinder -f orthofinder_test_data/
 ```
 
@@ -85,14 +128,17 @@ https://orthologer.ezlab.org/
 
 https://bioconda.github.io/recipes/orthologer/README.html
  
- OrthoLoger was installed using pixi
+OrthoLoger was installed using pixi
  
 ```bash
+# Add the right dependencies and install OrthoLoger
 pixi add python=3.12 "numpy<2" "scipy<1.13" "orthologer=3.9.1"
+
+# Install the requests Python library 
 pixi add requests
 ```
 
-run test data
+run on test data:
 
 change the paths below to match the location of your OrthoLoger installation and project directory
 
@@ -102,6 +148,7 @@ In the command below, replace:
 - **`.pixi/envs/default/ORTHOLOGER-3.9.1`** with the location of your OrthoLoger installation, if different
 
 ```bash
+# Run OrthoLoger with the test script
 pixi run bash -c 'export PATH="$CONDA_PREFIX/bin:$PATH" /home/epolonsky/benchmarking_project/.pixi/envs/default/ORTHOLOGER-3.9.1/test/run_test.sh prot/main'
 ```
 
@@ -116,8 +163,13 @@ The run log is stored in:
 To copy the generated test data into the project directory:
 
 ```bash
+# Go into the benchmarking project directory
 cd ~/benchmarking_project
+
+# make the orthologer test data directory
 mkdir orthologer_test_data
+
+# Copy the OrthoLoger results into the orthologer test data directory
 cp -r /home/epolonsky/benchmarking_project/.pixi/envs/default/ORTHOLOGER-3.9.1/test/tests/prot/* orthologer_test_data/
 ```
 
@@ -127,13 +179,17 @@ https://gitlab.com/paulklemm_PHD/proteinortho/-/tree/master?ref_type=heads
 proteinortho was installed through a conda environment
 
 ```bash
+# Make environment and install proteinortho with conda
 conda create -n proteinortho_env -c conda-forge -c bioconda python=3.7 proteinortho
 ```
 
-run test data
+run on test data:
 
 ```bash
+# activate the proteinortho conda environment
 conda activate proteinortho_env
+
+# run the perl script on the test data
 perl proteinortho6.pl -project= proteinortho_test_data/ proteinortho_test_data/C.faa proteinortho_test_data/E.faa proteinortho_test_data/L.faa proteinortho_test_data/M.faa
 ```
 

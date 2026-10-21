@@ -67,6 +67,7 @@ cp QfO_release_2020_04/Eukaryota/UP000005640_9606.fasta QfO_release_2020_04/Euka
 
 ```bash
 cd benchmarking_project
+mkdir datasets/sonicparanoid_fasta_only
 cp datasets/QfO_release_2020_04_combined_all/*.fasta datasets/sonicparanoid_fasta_only/
 
 nohup /usr/bin/time --verbose -o sonicparanoid_resource_usage.txt pixi run sonicparanoid -i datasets/sonicparanoid_fasta_only -o sonicparanoid_results --project-id sonicparanoid_main_benchmark --graph-only &

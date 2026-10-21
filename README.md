@@ -193,7 +193,7 @@ cd ~/benchmarking_project
 conda activate proteinortho_env
 
 # run the perl script on the test data
-perl proteinortho6.pl -project= proteinortho_test_data/ proteinortho_test_data/C.faa proteinortho_test_data/E.faa proteinortho_test_data/L.faa proteinortho_test_data/M.faa
+perl proteinortho6.pl -project=proteinortho_test_data/ proteinortho_test_data/C.faa proteinortho_test_data/E.faa proteinortho_test_data/L.faa proteinortho_test_data/M.faa
 ```
 
 # Data Selection

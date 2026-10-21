@@ -1,6 +1,6 @@
 # benchmarking_project
 
-## Project Overview
+# Project Overview
 
 This project aims to benchmark four orthology prediction tools to investigate their accuracy, computational performance, and the effect of evolutionary distance on ortholog prediction.
 
@@ -30,11 +30,170 @@ Orthologs are genes in different species that evolved from a common ancestral ge
 
 Computational tools identify orthologs using different combinations of sequence similarity searches, reciprocal best-hit approaches, graph clustering, and phylogenetic analysis. Because these methods differ, they may produce different orthology predictions and computational requirements.
 
-## Tool Installation
+# Tool Installation
 
-Installation instructions, software versions, dependencies, and example commands will be documented in `tool_install.md`.
+## Pixi
 
-## Data Selection
+Pixi was used to install Sonicparanoid2 and OrthoLoger
+
+The Pixi version used was 0.81.0
+
+```bash
+# Install Pixi
+wget -qO- https://pixi.sh/install.sh | sh
+
+# Reload Bash configuration
+source ~/.bashrc
+
+# Verify Pixi installation
+pixi --version
+
+# Go into the benchmarking project directory
+cd ~/benchmarking_project
+
+# Initialize Pixi project
+pixi init
+
+# Add package channels to the Pixi project
+pixi workspace channel add conda-forge
+pixi workspace channel add bioconda
+```
+
+
+## Sonicparanoid2
+https://gitlab.com/salvo981/sonicparanoid2
+https://bioconda.github.io/recipes/sonicparanoid/README.html
+
+Sonicparanoid2 was installed using pixi
+
+```bash
+# Go into the benchmarking project directory
+cd ~/benchmarking_project
+
+# Add Python 3.10 to the Pixi project
+pixi add python=3.10
+
+# Install SonicParanoid
+pixi add --pypi sonicparanoid
+```
+
+we did not use the mmsqs2 function of this tool as it was incompatible with the CPU on the server it required AVX2 and we only had AVX1. This was done using the --graph-only flag.
+run on test data:
+
+```bash
+# Retrieve the test data from SonicParanoid
+pixi run sonicparanoid-get-test-data -o sonicparanoid_test_data
+
+# Go into the SonicParanoid test data directory
+cd sonicparanoid_test_data/sonicparanoid_test/
+
+# Run SonicParanoid on the test data
+pixi run sonicparanoid -i ./test_input -o ./test_output --project-id my_first_run -t 4 --graph-only
+```
+
+problem we were having before (in case we want to try to fix it again)
+https://gitlab.com/salvo981/sonicparanoid2/-/work_items/54
+
+## OrthoFinder
+https://orthofinder.github.io/OrthoFinder/
+
+OrthoFinder was installed through a conda environment
+
+```bash
+# Create conda environment 
+conda create -n of3_env python=3.12
+
+# Activate the conda environment
+conda activate of3_env
+
+# Install OrthoFinder through conda
+conda install -c conda-forge -c bioconda orthofinder
+
+# Install numpy through conda
+conda install numpy=1.26.4
+```
+
+run on test data:
+
+```bash
+# Activate the conda environment for OrthoFinder
+conda activate of3_env
+
+# Run OrthoFinder on the test data
+orthofinder -f orthofinder_test_data/
+```
+
+## OrthoLoger
+https://orthologer.ezlab.org/
+
+https://bioconda.github.io/recipes/orthologer/README.html
+ 
+OrthoLoger was installed using pixi
+ 
+```bash
+# Add the right dependencies and install OrthoLoger
+pixi add python=3.12 "numpy<2" "scipy<1.13" "orthologer=3.9.1"
+
+# Install the requests Python library 
+pixi add requests
+```
+
+run on test data:
+
+change the paths below to match the location of your OrthoLoger installation and project directory
+
+In the command below, replace:
+
+- **`/home/epolonsky/benchmarking_project`** with the path to your own project directory
+- **`.pixi/envs/default/ORTHOLOGER-3.9.1`** with the location of your OrthoLoger installation, if different
+
+```bash
+# Run OrthoLoger with the test script
+pixi run bash -c 'export PATH="$CONDA_PREFIX/bin:$PATH" /home/epolonsky/benchmarking_project/.pixi/envs/default/ORTHOLOGER-3.9.1/test/run_test.sh prot/main'
+```
+
+OrthoLoger writes the test output to the test installation directory:
+
+**`/home/epolonsky/benchmarking_project/.pixi/envs/default/ORTHOLOGER-3.9.1/test/tests/prot/`**
+
+The run log is stored in:
+
+**`/home/epolonsky/benchmarking_project/.pixi/envs/default/ORTHOLOGER-3.9.1/test/tests/prot/RunLogs/`**
+
+To copy the generated test data into the project directory:
+
+```bash
+# Go into the benchmarking project directory
+cd ~/benchmarking_project
+
+# make the orthologer test data directory
+mkdir orthologer_test_data
+
+# Copy the OrthoLoger results into the orthologer test data directory
+cp -r /home/epolonsky/benchmarking_project/.pixi/envs/default/ORTHOLOGER-3.9.1/test/tests/prot/* orthologer_test_data/
+```
+
+## proteinortho
+https://gitlab.com/paulklemm_PHD/proteinortho/-/tree/master?ref_type=heads
+
+proteinortho was installed through a conda environment
+
+```bash
+# Make environment and install proteinortho with conda
+conda create -n proteinortho_env -c conda-forge -c bioconda python=3.7 proteinortho
+```
+
+run on test data:
+
+```bash
+# activate the proteinortho conda environment
+conda activate proteinortho_env
+
+# run the perl script on the test data
+perl proteinortho6.pl -project= proteinortho_test_data/ proteinortho_test_data/C.faa proteinortho_test_data/E.faa proteinortho_test_data/L.faa proteinortho_test_data/M.faa
+```
+
+# Data Selection
 
 The data for this project is selected from the European Bioinformatics Institute (EBI) Quest for Orthologs (QfO) reference proteome collection. The collection of datasets can be found using the link below.
 
@@ -76,15 +235,18 @@ Species were selected based on their evolutionary relationships and the availabi
 
 **Dataset summary:** The dataset contains 11 eukaryotic species. The close subset includes six mammalian species, and the distant subset includes six species representing diverse eukaryotic lineages. Human is shared between both subsets.
 
-## Comparing the Tools
+# Comparing the Tools
 
 The tools are compare using the following measures:
 
 | Category | Measurement |
 |----------|-------------|
 | Accuracy | Precision, recall, and F1 score |
-| Runtime | *`time`* |
-| Memory | *`/usr/bin/time —verbose`* |
+| Runtime and Memory | *`/usr/bin/time —verbose`* |
 | Agreement | Overlap and differences between predicted ortholog relationships |
 | Evolutionary distance | Changes in accuracy between closely related and distantly related species |
 | Dataset size | Changes in runtime, memory, and accuracy across dataset sizes |
+
+# Code for project
+
+All the code used for this project is in the `benchmarking_commands.md` file.

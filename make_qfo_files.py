@@ -1,10 +1,8 @@
 from pathlib import Path
 
-
 # Create the output folder
 output = Path("QfO_2020_04_benchmarking_service_files")
 output.mkdir(exist_ok=True)
-
 
 # Convert full FASTA IDs into UniProt accessions
 def get_accession(protein):
@@ -14,7 +12,6 @@ def get_accession(protein):
         return parts[1]
 
     return protein
-
 
 # Save pairs into a new TSV file
 def save_pairs(pairs, filename):
@@ -47,7 +44,6 @@ with open(file) as f:
 
                 if a != b:
                     pairs.add(tuple(sorted((a, b))))
-
 
 save_pairs(pairs, "proteinortho_QfO_2020_04.tsv")
 
@@ -86,9 +82,7 @@ for file in folder.rglob("*.tsv"):
                     if a != b:
                         pairs.add(tuple(sorted((a, b))))
 
-
 save_pairs(pairs, "orthofinder_QfO_2020_04.tsv")
-
 
 # SonicParanoid2
 
@@ -151,7 +145,6 @@ for file in folder.rglob("*.fasta"):
                     if a != b:
                         pairs.add(tuple(sorted((a, b))))
 
-
 if problems:
 
     print("SonicParanoid needs checking. No file created.")
@@ -188,13 +181,9 @@ for file in folder.glob("*.fs.maptxt"):
 
                 id_to_accession[internal_id] = accession
 
-
 print("Orthologer proteins mapped:", len(id_to_accession))
 
-
-
 # Read the BRH files
-
 
 folder = Path("orthologer_results/PWC")
 
@@ -224,7 +213,6 @@ for file in folder.rglob("*.brh"):
 
             if a != b:
                 pairs.add(tuple(sorted((a, b))))
-
 
 # Read the INPAR files
 
@@ -281,8 +269,7 @@ for file in folder.rglob("*.inpar"):
                     if a != b:
                         pairs.add(tuple(sorted((a, b))))
 
-
-# D. Save Orthologer results
+# Save Orthologer results
 
 print("Orthologer missing ID mappings:", missing_ids)
 

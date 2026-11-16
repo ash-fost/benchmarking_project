@@ -5,11 +5,24 @@ This document contains the commands and code used to run and benchmark the four 
 
 The commands are organized by tool and task to make the benchmarking process reproducible. 
 
+All four tools were evaluated using the same set of protein FASTA files extracted from the Quest for Orthologs (QfO) 2020_04 dataset. Tool-specific input directories were created where necessary to accommodate differences in software requirements.
+
 Before running the following commands make sure you are in the cloned benchmarking project directory:
 
 ```bash
 cd benchmarking_project
 ```
+
+## Software Environments
+
+The orthology inference tools were run using separate software
+environments to avoid dependency conflicts.
+
+- OrthoFinder: Conda (`of3_env`)
+- Proteinortho: Conda (`proteinortho_env`)
+- SonicParanoid2: Pixi (`sonicparanoid`)
+- OrthoLoger: Pixi (`orthologer`)
+
 ## Resource Usage
 
 The `/usr/bin/time --verbose` command was used to record resource
@@ -86,7 +99,7 @@ mkdir -p datasets/sonicparanoid_fasta_only
 cp datasets/QfO_release_2020_04_combined_all/*.fasta datasets/sonicparanoid_fasta_only/
 
 # Run SonicParanoid2
-nohup /usr/bin/time --verbose -o sonicparanoid_resource_usage.txt pixi run -e sonicparanoid  sonicparanoid -i datasets/sonicparanoid_fasta_only -o sonicparanoid_results --project-id sonicparanoid_main_benchmark --graph-only &
+nohup /usr/bin/time --verbose -o sonicparanoid_resource_usage.txt pixi run -e sonicparanoid sonicparanoid -i datasets/sonicparanoid_fasta_only -o sonicparanoid_results --project-id sonicparanoid_main_benchmark --graph-only &
 ```
 
 ## OrthoLoger

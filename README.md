@@ -294,36 +294,6 @@ The dataset we are using:
 
 Reference proteomes provide protein sequences for different species and can be used as input for orthology inference tools. This dataset was chosen because it is compatible with the most tools, allowing for a more seamless process. 
 
-## Dataset Categories
-
-The types of datasets used in this project:
-
-| Dataset | Species | Purpose |
-|---------|---------|---------|
-| Full | All 78 QfO species | Main benchmark |
-| Close | 6 related species | Closely related species |
-| Distant | 6 distant species | More distantly related species |
-
-Species were selected based on their evolutionary relationships and the availability of suitable proteomes and reference orthology data.
-
-## Species
-
-| Proteome_ID | Species | Common Name | NCBI Taxonomy ID | Subset |
-|-------------|---------|-------------|---|---|
-| `UP000005640` | *Homo sapiens* | Human | 9606 | Close and distant |
-| `UP000002277` | *Pan troglodytes* | Chimpanzee | 9598 | Close |
-| `UP000000589` | *Mus musculus* | Mouse | 10090 | Close |
-| `UP000002494` | *Rattus norvegicus* | Rat | 10116 | Close |
-| `UP000002254` | *Canis lupus familiaris* | Dog | 9615 | Close |
-| `UP000009136` | *Bos taurus* | Bovine | 9913 | Close |
-| `UP000000437` | *Danio rerio* | Zebrafish | 7955 | Distant |
-| `UP000000803` | *Drosophila melanogaster* | Fruit fly | 7227 | Distant |
-| `UP000001940` | *Caenorhabditis elegans* | Roundworm | 6239 | Distant |
-| `UP000002311` | *Saccharomyces cerevisiae* | Baker's yeast | 559292 | Distant |
-| `UP000006548` | *Arabidopsis thaliana* | Mouse-ear cress | 3702 | Distant |
-
-**Dataset summary:** The dataset contains 11 eukaryotic species. The close subset includes six mammalian species, and the distant subset includes six species representing diverse eukaryotic lineages. Human is shared between both subsets.
-
 # Comparing the Tools
 
 The tools are compare using the following measures:

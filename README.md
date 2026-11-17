@@ -14,7 +14,7 @@ The four tools benchmarked are:
 | OrthoLoger     | 3.9.1 | Pixi environment (pixi) | [OrthoLoger WebPage](https://orthologer.ezlab.org/) |
 
 
-The tools will be evaluated using  reference datasets from closely related and distantly related species. We will also investigate whether dataset size affects tool performance.
+The tools will be evaluated using reference datasets from closely related and distantly related species. 
 
 ## Research Questions
 
@@ -32,25 +32,35 @@ Computational tools identify orthologs using different combinations of sequence 
 
 # Tool Installation
 
-## Perequisites
+## Prerequisites
 
 Before running the benchmark, complete the following steps:
 
 - Clone the project repository.
 - Install Pixi, for the SonicParanoid2 and OrthoLoger environments.
 - Install Conda, for the Proteinortho and OrthoFinder environments.
-- The software dependencies required by each tool.
+
+You do not need to install each tool's dependencies manually. They are defined in the environment files included in the repository:
+
+| Tool | Environment file | Created with |
+|------|------------------|--------------|
+| SonicParanoid2 | `pixi.toml` (environment `sonicparanoid`) | `pixi install -e sonicparanoid` |
+| OrthoLoger | `pixi.toml` (environment `orthologer`) | `pixi install -e orthologer` |
+| OrthoFinder | `orthofinder.yaml` | `conda env create -f orthofinder.yaml` |
+| Proteinortho | `proteinortho.yaml` | `conda env create -f proteinortho.yaml` |
+
+The Pixi environments are also pinned by `pixi.lock`, which records the exact package versions used in this benchmark. Pixi uses it automatically during `pixi install`, so you get the same versions as used in this project.
 
 Clone the repository and enter the project directory:
 
-git clone <https://github.com/epolonsky/benchmarking_project>
-
+``` bash
+git clone https://github.com/epolonsky/benchmarking_project
 cd benchmarking_project
-
+```
 
 ## Pixi
 
-Pixi version 0.81.0 was used to install Sonicparanoid2 and OrthoLoger.
+Pixi version 0.81.0 was used to install SonicParanoid2 and OrthoLoger.
 
 Install Pixi using the [official installation instructions](https://pixi.prefix.dev/latest/installation/).
 
@@ -60,9 +70,9 @@ Verify the Pixi installation:
 pixi --version
 ```
 
-## Sonicparanoid2
+## SonicParanoid2
 
-Sonicparanoid2 was installed using pixi.
+SonicParanoid2 was installed using pixi.
 
 ```bash
 pixi install -e sonicparanoid
@@ -88,9 +98,10 @@ pixi run -e sonicparanoid sonicparanoid-get-test-data -o sonicparanoid_test_data
 pixi run -e sonicparanoid sonicparanoid -i ./sonicparanoid_test_data/sonicparanoid_test/test_input -o ./sonicparanoid_test_data/sonicparanoid_test/test_output --project-id my_first_run --graph-only
 ```
 
-### Expected output:
+<details>
+<summary><b>Expected output</b></summary>
 
-SonicParanoid2 ouputs its results into the output directory specified in the run command. The results directory contains three subdirectories.
+SonicParanoid2 outputs its results into the output directory specified in the run command. The results directory contains three subdirectories.
 
 These include:
 - **alignments:** Contains intermediate sequence alignment files generated during the protein comparison step.
@@ -102,6 +113,7 @@ The results directory contains two additional files:
 - **last_run_info.txt:** Records details about the most recent SonicParanoid2 run, including the run ID, input and output directories, number of input proteomes, analysis settings, alignment tool and parameters, memory and thread settings, and software environment information.
 - **snapshot.tsv:** Records information about each input proteome used in the analysis. The file includes a numerical identifier, species name, number of protein sequences, and total number of amino acids. This information helps identify and track the input proteomes used across analyses.
 
+</details>
 problem we were having before:
 [Forum About Error](https://gitlab.com/salvo981/sonicparanoid2/-/work_items/54)
 
@@ -115,7 +127,7 @@ conda env create -f orthofinder.yaml
 
 Run on test data:
 
-Test data for OrthoFinder was obtain from the OrthoFinder GitHub page.
+Test data for OrthoFinder was obtained from the OrthoFinder GitHub page.
 
 ```bash
 # Activate the Conda environment for OrthoFinder
@@ -125,9 +137,10 @@ conda activate of3_env
 orthofinder -f orthofinder_test_data/
 ```
 
-### Expected output:
+<details>
+<summary><b>Expected output</b></summary>
 
-OrthoFinder ouputs its results into a dirctory called `Resuts_Date`, with the "Date"  being the date the analysis was run. This results directory contains 13 subdirectories that organize the output files according to their purpose. 
+OrthoFinder outputs its results into a directory called `Results_Date`, with the "Date" being the date the analysis was run. This results directory contains 13 subdirectories that organize the output files according to their purpose. 
 
 These include:
 
@@ -139,11 +152,11 @@ These include:
 - **Orthologues:** Contains files describing orthologous relationships between genes from different species.
 - **Phylogenetic_Hierarchical_Orthogroups:** Contains hierarchical orthogroups (HOGs) inferred at different levels of the species tree.
 - **Phylogenetically_Misplaced_Genes:** Contains genes identified as potentially misplaced within their gene trees.
-- **Putarive_Xenologs:** Contains genes identified as potential xenologs, which may have originated through horizontal gene transfer.
+- **Putative_Xenologs:** Contains genes identified as potential xenologs, which may have originated through horizontal gene transfer.
 - **Resolved_Gene_Trees:** Contains rooted and resolved gene trees for orthogroups.
 - **Single_Copy_Orthologue_Sequences:** Contains FASTA files of sequences belonging to single-copy orthogroups.
 - **Species_Tree:** Contains the inferred species phylogenetic tree and related files.
-- **Working Directory:** Contains intermediate files generated during the OrthoFinder analysis.
+- **WorkingDirectory:** Contains intermediate files generated during the OrthoFinder analysis.
 
 The results directory contains two additional files:
 
@@ -152,6 +165,7 @@ The results directory contains two additional files:
 
 For more detailed descriptions of the individual output files, refer to the [Official OrthoFinder Guide to Results](https://orthofinder.github.io/OrthoFinder/tutorials/guide-to-results/). 
 
+</details>
 
 ## OrthoLoger
 OrthoLoger was installed using pixi.
@@ -168,14 +182,15 @@ pixi run -e orthologer orthologer -v
 
 run on test data:
 
-The test data for OrthoLoger is obtained through running the `run_test.sh` script within OrhtoLoger's installation.
+The test data for OrthoLoger is obtained through running the `run_test.sh` script within OrthoLoger's installation.
 
 ```bash
 # Run OrthoLoger with the test script
 pixi run -e orthologer bash -c 'export PATH="$CONDA_PREFIX/bin:$PATH"; "$CONDA_PREFIX/ORTHOLOGER-3.9.1/test/run_test.sh" prot/main'
 ```
 
-### Expected output:
+<details>
+<summary><b>Expected output</b></summary>
 
 OrthoLoger writes its test data and analysis results within its working directory. For the installed test environment, the test data are located under:
 
@@ -213,7 +228,7 @@ The results directory contains 14 additional files:
 
 - **cleanup.sh:** Shell script used to remove temporary files and clean up the working directory.
 - **orthologer_conf.sh:** Configuration file containing settings for the OrthoLoger pipeline.
-- **ortholofer_conf.sh.bck_pipeline:** Backup configuration file associated with the pipeline.
+- **orthologer_conf.sh.bck_pipeline:** Backup configuration file associated with the pipeline.
 - **orthologer.sh:** Main shell script used to execute the OrthoLoger pipeline.
 - **orthomapper_conf.sh:** Configuration file containing settings for the OrthoMapper pipeline.
 - **orthomapper.sh:** Shell script used to execute the OrthoMapper pipeline.
@@ -225,6 +240,8 @@ The results directory contains 14 additional files:
 - **run_test1_localmap.sh:** Shell script used to execute the local mapping test.
 - **setup.log:** Log file documenting the setup process.
 - **setup.sh:** Shell script used to configure and prepare the test environment.
+
+</details>
 
 To copy the generated test data into your own project directory:
 
@@ -253,7 +270,7 @@ conda env create -f proteinortho.yaml
 
 run on test data:
 
-Test data for Proteinortho was obtain from the Proteinortho GitLab page.
+Test data for Proteinortho was obtained from the Proteinortho GitLab page.
 
 ```bash
 # activate the proteinortho Conda environment
@@ -265,7 +282,8 @@ perl proteinortho6.pl -project=proteinortho_test_data proteinortho_test_data/C.f
 
 The Proteinortho command assumes that proteinortho6.pl is available from the current directory, otherwise it can be downloaded into the directory from the Proteinortho GitLab page.
 
-### Expected output:
+<details>
+<summary><b>Expected output</b></summary>
 
 Proteinortho outputs its results into the directory you run it from. The results contain six files. The -project option identifies the project name used for the run and the prefix names for the output files.
 
@@ -282,6 +300,8 @@ For more detailed descriptions of the individual output files, refer to `Output 
 
 **Note:** Proteinortho may generate additional output files, such as the `.proteinortho.html` and `.proteinortho-graph.summary` files. However, these files are not generated in every run. Automatic HTML generation is limited to runs with fewer than 10 input proteomes and graph summary generation depends on additional conditions, including graph size (smaller than 50 MB) and the availability of the required summary script. Therefore, these files may be absent when running Proteinortho with larger datasets.
 
+</details>
+
 # Data Selection
 
 The data for this project is selected from the European Bioinformatics Institute (EBI) Quest for Orthologs (QfO) reference proteome collection. The collection of datasets can be found using the link below.
@@ -296,15 +316,14 @@ Reference proteomes provide protein sequences for different species and can be u
 
 # Comparing the Tools
 
-The tools are compare using the following measures:
+The tools are compared using the following measures:
 
 | Category | Measurement |
 |----------|-------------|
 | Accuracy | Precision, recall, and F1 score |
-| Runtime and Memory | *`/usr/bin/time —verbose`* |
+| Runtime and Memory | *`/usr/bin/time --verbose`* |
 | Agreement | Overlap and differences between predicted ortholog relationships |
 | Evolutionary distance | Changes in accuracy between closely related and distantly related species |
-| Dataset size | Changes in runtime, memory, and accuracy across dataset sizes |
 
 # Code for project
 
